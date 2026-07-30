@@ -36,6 +36,7 @@ import { HarnessFooter } from "./harness-footer";
 import { SidebarVersion } from "./sidebar-version";
 import { ThemeToggle } from "./theme-toggle";
 import { listGoalGroupMemberships, listGoalGroups } from "@/server/db/goal-groups";
+import { RemoteControl } from "@/components/remote-control";
 
 type NavItem = {
   href: string;
@@ -255,6 +256,7 @@ export async function AppSidebar() {
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}
+                <RemoteControl />
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
