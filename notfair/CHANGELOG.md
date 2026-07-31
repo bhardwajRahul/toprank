@@ -1,5 +1,9 @@
 # NotFair
 
+## 0.9.19 — 2026-07-30
+
+**Remote control brings the full NotFair workspace to your phone.** Activate it from the sidebar to create a temporary Cloudflare URL protected by a private fragment-to-cookie sign-in; unauthenticated public traffic stays blocked, and stopping the session invalidates the link. Mobile navigation now exposes the same control from the workspace drawer.
+
 ## 0.9.18 — 2026-07-22
 
 **Streaming replies now stay visually quiet.** While the agent writes, chat shows only the animated **Writing the response** label—without a spinner, goal name, timer, tool subtitle, or activity history—so the status no longer competes with the response itself.
