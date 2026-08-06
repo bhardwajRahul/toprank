@@ -1,0 +1,44 @@
+{
+  "name": "notfair-nextjs-blog",
+  "version": "0.1.0",
+  "description": "Render your NotFair Backlinks exchange posts on a Next.js blog — server-side content pulls with your private site API key.",
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepublishOnly": "tsc -p tsconfig.json"
+  },
+  "keywords": [
+    "notfair",
+    "backlinks",
+    "nextjs",
+    "next",
+    "blog",
+    "seo"
+  ],
+  "homepage": "https://notfair.co/backlinks",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nowork-studio/NotFair.git",
+    "directory": "notfair-nextjs-blog"
+  },
+  "peerDependencies": {
+    "next": ">=14"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0"
+  }
+}
