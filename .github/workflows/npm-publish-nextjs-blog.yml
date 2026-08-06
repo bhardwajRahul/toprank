@@ -17,9 +17,9 @@ concurrency:
 
 jobs:
   publish:
-    # Pure TypeScript, no native deps — ubuntu is fine here (unlike the main
-    # notfair package, which needs macOS ARM64 for its prebuilds).
-    runs-on: ubuntu-latest
+    # macos-14 matches the main notfair publish workflow — ubuntu-latest jobs
+    # were never acquired by a hosted runner in this org (see run 31127380316).
+    runs-on: macos-14
     defaults:
       run:
         working-directory: notfair-nextjs-blog
