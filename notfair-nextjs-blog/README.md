@@ -1,6 +1,6 @@
 # notfair-nextjs-blog
 
-Render your [NotFair Backlinks](https://notfair.co/backlinks) exchange posts on
+Render your [NotFair SEO](https://notfair.co/seo) exchange posts on
 a Next.js (App Router) blog. Pull model: your site fetches published posts
 server-side from the NotFair content API with a private key — nothing is ever
 pushed to your infrastructure.
@@ -13,12 +13,12 @@ pushed to your infrastructure.
 npm install notfair-nextjs-blog
 ```
 
-2. In the NotFair Backlinks dashboard, create a **Next.js / headless**
+2. In the NotFair SEO dashboard, create a **Next.js / headless**
    integration and copy the site API key (shown once).
 3. Add it to your environment — server-side only, never `NEXT_PUBLIC_`:
 
 ```bash
-NOTFAIR_BACKLINKS_API_KEY=nfbl_...
+NOTFAIR_SEO_API_KEY=nfbl_...
 ```
 
 4. Set your integration's **public post URL pattern** to where these pages
@@ -31,10 +31,10 @@ NOTFAIR_BACKLINKS_API_KEY=nfbl_...
 
 ```tsx
 import Link from "next/link";
-import { getBacklinksPosts } from "notfair-nextjs-blog";
+import { getSeoPosts } from "notfair-nextjs-blog";
 
 export default async function BlogIndex() {
-  const posts = await getBacklinksPosts();
+  const posts = await getSeoPosts();
   return (
     <main>
       <h1>Blog</h1>
@@ -52,7 +52,7 @@ export default async function BlogIndex() {
 
 ```tsx
 import { notFound } from "next/navigation";
-import { getBacklinksPost } from "notfair-nextjs-blog";
+import { getSeoPost } from "notfair-nextjs-blog";
 
 export default async function BlogPost({
   params,
@@ -60,7 +60,7 @@ export default async function BlogPost({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = await getBacklinksPost(slug);
+  const post = await getSeoPost(slug);
   if (!post) notFound();
   return (
     <article>
@@ -75,5 +75,5 @@ Responses revalidate hourly by default (`{ revalidate }` option to change).
 
 ## API
 
-- `getBacklinksPosts({ revalidate? })` → `[{ id, title, slug, published_at, created_at }]`
-- `getBacklinksPost(slug, { revalidate? })` → adds `content_html`, or `null`
+- `getSeoPosts({ revalidate? })` → `[{ id, title, slug, published_at, created_at }]`
+- `getSeoPost(slug, { revalidate? })` → adds `content_html`, or `null`
