@@ -24,6 +24,33 @@ export type SeoPostSummary = {
 
 export type SeoPost = SeoPostSummary & { content_html: string };
 
+export type SeoFetchOptions = { revalidate?: number };
+
+/** A collision-safe union for rendering an existing blog index alongside
+ *  NotFair posts without forcing either source into the other's data shape. */
+export type MergedBlogPost<T> =
+  | { source: "existing"; post: T }
+  | { source: "notfair"; post: SeoPostSummary };
+
+/** Merge NotFair summaries into an existing blog. Existing posts keep their
+ *  order and win duplicate slugs; NotFair-only posts follow in API order. */
+export function mergeBlogPosts<T extends { slug: string }>(
+  existingPosts: readonly T[],
+  seoPosts: readonly SeoPostSummary[],
+): MergedBlogPost<T>[] {
+  const existingSlugs = new Set(existingPosts.map((post) => post.slug));
+  return [
+    ...existingPosts.map((post) => ({ source: "existing" as const, post })),
+    ...seoPosts
+      .filter((post) => !existingSlugs.has(post.slug))
+      .map((post) => ({ source: "notfair" as const, post })),
+  ];
+}
+
+export type ResolvedBlogPost<T> =
+  | { source: "existing"; post: T }
+  | { source: "notfair"; post: SeoPost };
+
 function apiKey(): string {
   const key = process.env.NOTFAIR_SEO_API_KEY;
   if (!key) {
@@ -49,7 +76,7 @@ async function contentFetch(path: string, revalidate: number): Promise<Response>
 
 /** List published exchange posts (no bodies — cheap for blog indexes). */
 export async function getSeoPosts(
-  opts: { revalidate?: number } = {},
+  opts: SeoFetchOptions = {},
 ): Promise<SeoPostSummary[]> {
   const res = await contentFetch("", opts.revalidate ?? 3600);
   if (!res.ok) return [];
@@ -61,10 +88,25 @@ export async function getSeoPosts(
  *  slug doesn't exist or isn't published. */
 export async function getSeoPost(
   slug: string,
-  opts: { revalidate?: number } = {},
+  opts: SeoFetchOptions = {},
 ): Promise<SeoPost | null> {
   const res = await contentFetch(`?slug=${encodeURIComponent(slug)}`, opts.revalidate ?? 3600);
   if (!res.ok) return null;
   const body = (await res.json().catch(() => null)) as { post?: SeoPost } | null;
   return body?.post ?? null;
+}
+
+/** Resolve a dynamic /blog/[slug] route without shadowing the site's native
+ *  posts. The existing loader always runs first; NotFair is queried only when
+ *  it returns null or undefined. */
+export async function getBlogPostWithSeoFallback<T>(
+  slug: string,
+  getExistingPost: (slug: string) => T | null | undefined | Promise<T | null | undefined>,
+  opts: SeoFetchOptions = {},
+): Promise<ResolvedBlogPost<T> | null> {
+  const existing = await getExistingPost(slug);
+  if (existing != null) return { source: "existing", post: existing };
+
+  const post = await getSeoPost(slug, opts);
+  return post ? { source: "notfair", post } : null;
 }

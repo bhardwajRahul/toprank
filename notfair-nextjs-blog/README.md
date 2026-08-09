@@ -21,9 +21,9 @@ npm install notfair-nextjs-blog
 NOTFAIR_SEO_API_KEY=nfbl_...
 ```
 
-4. Set your integration's **public post URL pattern** to where these pages
-   render (e.g. `https://yoursite.com/blog/{slug}`) — link verification crawls
-   it, and hosted links only earn credits once verified.
+4. Publish NotFair posts under `/blog/{slug}`. The dashboard derives the
+   verification URL automatically. If `/blog` already exists, merge NotFair
+   into it as an additional source rather than replacing the route.
 
 ## Minimal app/blog
 
@@ -73,7 +73,56 @@ export default async function BlogPost({
 
 Responses revalidate hourly by default (`{ revalidate }` option to change).
 
+## Existing `/blog`
+
+Keep your current blog queries, components, metadata, and styling. Native posts
+win slug collisions; NotFair fills only the remaining index entries and slugs.
+
+For the index, fetch both sources in parallel and merge them without reshaping
+your existing post type:
+
+```tsx
+import { getSeoPosts, mergeBlogPosts } from "notfair-nextjs-blog";
+
+const [existingPosts, seoPosts] = await Promise.all([
+  getExistingPosts(),
+  getSeoPosts(),
+]);
+const posts = mergeBlogPosts(existingPosts, seoPosts);
+
+// Branch on item.source and render each source with the site's existing cards.
+// Every item still links to /blog/${item.post.slug}.
+```
+
+For `app/blog/[slug]/page.tsx`, resolve the existing source first and call
+NotFair only as a fallback:
+
+```tsx
+import { notFound } from "next/navigation";
+import { getBlogPostWithSeoFallback } from "notfair-nextjs-blog";
+
+const result = await getBlogPostWithSeoFallback(slug, getExistingPost);
+if (!result) notFound();
+
+if (result.source === "existing") {
+  return <ExistingPost post={result.post} />;
+}
+
+return (
+  <article>
+    <h1>{result.post.title}</h1>
+    <div dangerouslySetInnerHTML={{ __html: result.post.content_html }} />
+  </article>
+);
+```
+
+Apply the same native-first lookup in `generateMetadata`. Do not call
+`notFound()` until both sources return no post.
+
 ## API
 
 - `getSeoPosts({ revalidate? })` → `[{ id, title, slug, published_at, created_at }]`
 - `getSeoPost(slug, { revalidate? })` → adds `content_html`, or `null`
+- `mergeBlogPosts(existing, seo)` → discriminated list; existing slugs win
+- `getBlogPostWithSeoFallback(slug, getExistingPost, { revalidate? })` →
+  `{ source, post }`, or `null`
