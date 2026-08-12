@@ -33,7 +33,7 @@
   "homepage": "https://notfair.co/backlinks",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nowork-studio/NotFair.git",
+    "url": "git+https://github.com/nowork-studio/notfair-plugin.git",
     "directory": "notfair-nextjs-blog"
   },
   "peerDependencies": {

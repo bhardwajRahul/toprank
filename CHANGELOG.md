@@ -17,6 +17,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- **Repository renamed to `nowork-studio/notfair-plugin`.** Active clone, install, update-check, package metadata, and source links now use the new GitHub repository name. The plugin name and `/notfair:*` command namespace remain unchanged.
 - **`/google-ads-copy` now records concepts and claim sources,** requires unsupported proof to be marked for substantiation, and makes test decisions from pre-set metrics and adequate exposure rather than early conversion-rate gaps.
 
 ---

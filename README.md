@@ -29,7 +29,7 @@ NotFair currently ships **42 skills** across SEO, GEO, paid media, Google Ads, M
 Install the NotFair plugin from its marketplace:
 
 ```text
-/plugin marketplace add nowork-studio/notfair
+/plugin marketplace add nowork-studio/notfair-plugin
 /plugin install notfair@nowork-studio
 ```
 
@@ -55,15 +55,15 @@ You can also use plain language:
 NotFair's skill source is host-agnostic. Clone the repository and open it as a workspace; [`AGENTS.md`](AGENTS.md) maps marketing requests to the right skill.
 
 ```bash
-git clone https://github.com/nowork-studio/notfair.git
-cd notfair
+git clone https://github.com/nowork-studio/notfair-plugin.git
+cd notfair-plugin
 ```
 
 For host-specific setup, give your agent [`INSTALL_FOR_AGENTS.md`](INSTALL_FOR_AGENTS.md), or paste:
 
 ```text
 Retrieve and follow the instructions at:
-https://raw.githubusercontent.com/nowork-studio/notfair/main/INSTALL_FOR_AGENTS.md
+https://raw.githubusercontent.com/nowork-studio/notfair-plugin/main/INSTALL_FOR_AGENTS.md
 ```
 
 ## Why skills instead of one giant marketing agent?
@@ -164,7 +164,7 @@ Inside a skill, connectors use tool-agnostic placeholders such as `~~google-ads`
 ## How the repository is organized
 
 ```text
-notfair/
+notfair-plugin/
 ├── AGENTS.md                    # intent-to-skill resolver for AI agents
 ├── .claude-plugin/              # Claude Code plugin manifest
 ├── paid-ads/                    # cross-channel planning, review, optimization
@@ -211,7 +211,7 @@ Open a pull request with one skill or one coherent improvement. For application 
 ## Community
 
 - Join the [NotFair Discord](https://discord.gg/gVJCRczpps)
-- [Open an issue](https://github.com/nowork-studio/notfair/issues)
+- [Open an issue](https://github.com/nowork-studio/notfair-plugin/issues)
 - Star the repository if these workflows make your agent more useful
 
 ## License

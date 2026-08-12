@@ -4,11 +4,11 @@ Thanks for poking around! NotFair is small, opinionated, and willing to grow.
 
 ## Dev setup
 
-The app lives in the `notfair/` directory of the [nowork-studio/NotFair](https://github.com/nowork-studio/NotFair) repo:
+The app lives in the `notfair/` directory of the [nowork-studio/notfair-plugin](https://github.com/nowork-studio/notfair-plugin) repo:
 
 ```bash
-git clone https://github.com/nowork-studio/NotFair.git
-cd NotFair/notfair
+git clone https://github.com/nowork-studio/notfair-plugin.git
+cd notfair-plugin/notfair
 pnpm install
 ```
 

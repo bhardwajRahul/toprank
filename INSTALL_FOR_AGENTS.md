@@ -6,7 +6,7 @@ You are an AI coding agent (Claude Code, Codex, Hermes, Cursor, or similar). The
 
 ```
 Retrieve and follow the instructions at:
-https://raw.githubusercontent.com/nowork-studio/notfair/main/INSTALL_FOR_AGENTS.md
+https://raw.githubusercontent.com/nowork-studio/notfair-plugin/main/INSTALL_FOR_AGENTS.md
 ```
 
 ---
@@ -31,8 +31,8 @@ If the NotFair repo is already on disk locally, use it; do not re-clone.
 Otherwise:
 
 ```bash
-git clone https://github.com/nowork-studio/notfair.git
-cd notfair
+git clone https://github.com/nowork-studio/notfair-plugin.git
+cd notfair-plugin
 ```
 
 ---
@@ -44,7 +44,7 @@ cd notfair
 NotFair is published as a Claude Code plugin via the `nowork-studio` marketplace. The user should run inside Claude Code:
 
 ```
-/plugin marketplace add nowork-studio/notfair
+/plugin marketplace add nowork-studio/notfair-plugin
 /plugin install notfair@nowork-studio
 ```
 

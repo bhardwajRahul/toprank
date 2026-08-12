@@ -18,7 +18,7 @@ CACHE_FILE="$STATE_DIR/last-update-check"
 MARKER_FILE="$STATE_DIR/just-upgraded-from"
 SNOOZE_FILE="$STATE_DIR/update-snoozed"
 VERSION_FILE="$TOPRANK_DIR/VERSION"
-REMOTE_URL="${TOPRANK_REMOTE_URL:-https://raw.githubusercontent.com/nowork-studio/notfair/main/VERSION}"
+REMOTE_URL="${TOPRANK_REMOTE_URL:-https://raw.githubusercontent.com/nowork-studio/notfair-plugin/main/VERSION}"
 CONFIG_BIN="$TOPRANK_DIR/bin/notfair-config"
 VERSION_RE='^[0-9]+(\.[0-9]+)+$'
 
