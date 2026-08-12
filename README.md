@@ -1,11 +1,11 @@
-# NotFair
+# NotFair Plugin
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-16a34a)](LICENSE)
 [![Discord](https://img.shields.io/badge/Discord-Join%20the%20community-5865F2?logo=discord&logoColor=white)](https://discord.gg/gVJCRczpps)
 
 **Open-source SEO, GEO, and marketing skills for AI agents.**
 
-NotFair gives Claude Code, Codex, Hermes, and other compatible agents practical marketing workflows they can follow—not another generic prompt collection. Use it to audit a site, investigate a traffic drop, improve content for Google and AI search, find wasted ad spend, build campaign plans, and make reviewable changes.
+The NotFair Plugin gives Claude Code, Codex, Hermes, and other compatible agents practical marketing workflows they can follow—not another generic prompt collection. Use it to audit a site, investigate a traffic drop, improve content for Google and AI search, find wasted ad spend, build campaign plans, and make reviewable changes.
 
 Every skill is built in the open as a readable `SKILL.md`, with supporting references, scripts, and evals where needed. Inspect it, adapt it, or contribute a better workflow.
 
@@ -20,7 +20,7 @@ Every skill is built in the open as a readable `SKILL.md`, with supporting refer
 | **Meta Ads** | Review Facebook and Instagram performance, diagnose creative fatigue, assess audiences, and create evidence-based creative briefs |
 | **Content** | Turn search demand into editorial plans, briefs, articles, landing pages, metadata, and structured data |
 
-NotFair currently ships **42 skills** across SEO, GEO, paid media, Google Ads, Meta Ads, and cross-model review.
+The NotFair Plugin currently ships **42 skills** across SEO, GEO, paid media, Google Ads, Meta Ads, and cross-model review.
 
 ## Quick start
 
@@ -52,7 +52,7 @@ You can also use plain language:
 
 ### Codex, Hermes, and other agents
 
-NotFair's skill source is host-agnostic. Clone the repository and open it as a workspace; [`AGENTS.md`](AGENTS.md) maps marketing requests to the right skill.
+The NotFair Plugin's skill source is host-agnostic. Clone the repository and open it as a workspace; [`AGENTS.md`](AGENTS.md) maps marketing requests to the right skill.
 
 ```bash
 git clone https://github.com/nowork-studio/notfair-plugin.git
@@ -68,7 +68,7 @@ https://raw.githubusercontent.com/nowork-studio/notfair-plugin/main/INSTALL_FOR_
 
 ## Why skills instead of one giant marketing agent?
 
-Marketing work gets unreliable when every request goes through the same vague prompt. NotFair splits the work into focused, testable procedures.
+Marketing work gets unreliable when every request goes through the same vague prompt. The NotFair Plugin splits the work into focused, testable procedures.
 
 - **Specialized:** each skill has a defined job, required inputs, decision rules, and output format.
 - **Evidence-led:** live-data workflows use Search Console, Google Ads, or Meta Ads instead of guessing from generic best practices.
