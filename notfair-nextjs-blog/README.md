@@ -22,7 +22,24 @@ npm install --save-dev @types/sanitize-html
 NOTFAIR_SEO_API_KEY=nfbl_...
 ```
 
-4. Publish NotFair posts under `/blog/{slug}`. The dashboard derives the
+4. Allow NotFair-hosted article images through Next.js image optimization.
+   Preserve your existing `next.config.js` or `next.config.ts` and append the
+   following entry to `images.remotePatterns`:
+
+```js
+images: {
+  remotePatterns: [
+    // ...your existing image patterns,
+    {
+      protocol: "https",
+      hostname: "notfair.co",
+      pathname: "/api/seo/**",
+    },
+  ],
+},
+```
+
+5. Publish NotFair posts under `/blog/{slug}`. The dashboard derives the
    verification URL automatically. If `/blog` already exists, merge NotFair
    into it as an additional source rather than replacing the route.
 
@@ -135,6 +152,7 @@ of the host application's design system.
 `app/blog/page.tsx`:
 
 ```tsx
+import Image from "next/image";
 import Link from "next/link";
 import { getSeoPosts } from "notfair-nextjs-blog";
 
@@ -145,6 +163,7 @@ export default async function BlogIndex() {
       <h1>Blog</h1>
       {posts.map((p) => (
         <article key={p.slug}>
+          <Image src={p.image_url} alt={p.title} width={1600} height={900} />
           <Link href={`/blog/${p.slug}`}>{p.title}</Link>
         </article>
       ))}
@@ -158,6 +177,7 @@ export default async function BlogIndex() {
 ```tsx
 import { notFound } from "next/navigation";
 import { getSeoPost } from "notfair-nextjs-blog";
+import { NotFairPostHero } from "notfair-nextjs-blog/react";
 import { sanitizeNotFairArticleHtml } from "@/lib/notfair-article";
 import styles from "../notfair-article.module.css";
 
@@ -171,7 +191,7 @@ export default async function BlogPost({
   if (!post) notFound();
   return (
     <article>
-      <h1>{post.title}</h1>
+      <NotFairPostHero post={post} />
       <div
         className={styles.articleContent}
         dangerouslySetInnerHTML={{
@@ -182,6 +202,13 @@ export default async function BlogPost({
   );
 }
 ```
+
+`NotFairPostHero` is an optional, image-first Server Component exported from
+`notfair-nextjs-blog/react`. It renders the generated 16:9 cover before the
+article `<h1>` and accepts `className`, `imageClassName`, and `titleClassName`
+for the host design system. Existing data-client imports and page templates are
+unchanged when upgrading; adopt the component when you want the canonical
+header.
 
 Responses revalidate hourly by default (`{ revalidate }` option to change).
 
@@ -212,6 +239,7 @@ NotFair only as a fallback:
 ```tsx
 import { notFound } from "next/navigation";
 import { getBlogPostWithSeoFallback } from "notfair-nextjs-blog";
+import { NotFairPostHero } from "notfair-nextjs-blog/react";
 
 const result = await getBlogPostWithSeoFallback(slug, getExistingPost);
 if (!result) notFound();
@@ -222,7 +250,7 @@ if (result.source === "existing") {
 
 return (
   <article>
-    <h1>{result.post.title}</h1>
+    <NotFairPostHero post={result.post} />
     <div
       className={styles.articleContent}
       dangerouslySetInnerHTML={{
@@ -246,8 +274,10 @@ reachable at the configured `/blog/{slug}` URL for link verification.
 
 ## API
 
-- `getSeoPosts({ revalidate? })` → `[{ id, title, slug, published_at, created_at }]`
+- `getSeoPosts({ revalidate? })` → summaries including `image_url`, tags, and timestamps
 - `getSeoPost(slug, { revalidate? })` → adds `content_html`, or `null`
 - `mergeBlogPosts(existing, seo)` → discriminated list; existing slugs win
 - `getBlogPostWithSeoFallback(slug, getExistingPost, { revalidate? })` →
   `{ source, post }`, or `null`
+- `NotFairPostHero` from `notfair-nextjs-blog/react` → optional image-first
+  article cover and title; existing renderers remain compatible

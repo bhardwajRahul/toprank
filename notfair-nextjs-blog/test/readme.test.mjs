@@ -18,3 +18,9 @@ test("README requires sanitized, scoped NotFair article rendering", () => {
   assert.match(readme, /from "\.\.\/notfair-article\.module\.css"/);
   assert.doesNotMatch(readme, /dangerouslySetInnerHTML=\{\{ __html: post\.content_html \}\}/);
 });
+
+test("README uses the canonical image-first article hero", () => {
+  assert.match(readme, /NotFairPostHero/);
+  assert.match(readme, /notfair-nextjs-blog\/react/);
+  assert.doesNotMatch(readme, /<h1>\{post\.title\}<\/h1>\s*<Image src=\{post\.image_url\}/);
+});

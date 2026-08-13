@@ -48,9 +48,9 @@ jobs:
         if: steps.version.outputs.skip != 'true'
         run: npm install
 
-      - name: Build
+      - name: Test and build
         if: steps.version.outputs.skip != 'true'
-        run: npm run build
+        run: npm test
 
       - name: Publish ${{ steps.version.outputs.local }}
         if: steps.version.outputs.skip != 'true'

@@ -15,7 +15,7 @@ export type SeoPostSummary = {
   slug: string;
   meta_description: string | null;
   tags: string[];
-  /** Generated title-card image (1200×630) — thumbnail / og:image. */
+  /** Generated 16:9 title-card image — article hero, thumbnail, and og:image. */
   image_url: string;
   reading_time_minutes: number | null;
   published_at: string | null;
