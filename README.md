@@ -5,7 +5,7 @@
 
 **Open-source SEO, GEO, and marketing skills for AI agents.**
 
-The NotFair Plugin gives Claude Code, Codex, Hermes, and other compatible agents practical marketing workflows they can follow—not another generic prompt collection. Use it to audit a site, investigate a traffic drop, improve content for Google and AI search, find wasted ad spend, build campaign plans, and make reviewable changes.
+The NotFair Plugin gives Claude Code, Codex, Hermes, and other compatible agents practical marketing workflows they can follow—not another generic prompt collection. Use it to audit a site, investigate a traffic drop, analyze GA4 and Search Console, find wasted ad spend across Google, Meta, X, and LinkedIn, build campaign plans, and make reviewable changes.
 
 Every skill is built in the open as a readable `SKILL.md`, with supporting references, scripts, and evals where needed. Inspect it, adapt it, or contribute a better workflow.
 
@@ -18,9 +18,12 @@ Every skill is built in the open as a readable `SKILL.md`, with supporting refer
 | **Paid media** | Plan, review, and optimize cross-channel campaigns with explicit budgets, measurement, and approval boundaries |
 | **Google Ads** | Audit accounts, analyze search terms, manage keywords and budgets, write RSA copy, plan assets, and diagnose landing pages |
 | **Meta Ads** | Review Facebook and Instagram performance, diagnose creative fatigue, assess audiences, and create evidence-based creative briefs |
+| **X Ads** | Analyze campaigns and line items, review conversion performance, manage targeting and creative, and execute approved changes |
+| **LinkedIn Ads** | Connect B2B media to lead quality, analyze campaign groups and campaigns, and manage targeting, creative, conversions, and leads |
+| **Analytics** | Query live GA4 and Search Console data, compare complete periods, inspect URLs, manage sitemaps, and update supported measurement configuration |
 | **Content** | Turn search demand into editorial plans, briefs, articles, landing pages, metadata, and structured data |
 
-The NotFair Plugin currently ships **42 skills** across SEO, GEO, paid media, Google Ads, Meta Ads, and cross-model review.
+The NotFair Plugin currently ships **45 skills** across SEO, GEO, paid media, advertising platforms, analytics, and cross-model review.
 
 ## Quick start
 
@@ -40,6 +43,9 @@ Then ask for the workflow you need:
 /notfair:geo-optimizer
 /notfair:google-ads-audit
 /notfair:meta-ads-creative
+/notfair:paid-ads-x
+/notfair:google-analytics
+/notfair:search-console
 ```
 
 You can also use plain language:
@@ -71,7 +77,7 @@ https://raw.githubusercontent.com/nowork-studio/notfair-plugin/main/INSTALL_FOR_
 Marketing work gets unreliable when every request goes through the same vague prompt. The NotFair Plugin splits the work into focused, testable procedures.
 
 - **Specialized:** each skill has a defined job, required inputs, decision rules, and output format.
-- **Evidence-led:** live-data workflows use Search Console, Google Ads, or Meta Ads instead of guessing from generic best practices.
+- **Evidence-led:** live-data workflows use Search Console, Google Analytics, Google Ads, Meta Ads, X Ads, or LinkedIn Ads instead of guessing from generic best practices.
 - **Safe by design:** read-only review comes before mutation, paid-media changes stay explicit, and unsupported capabilities are never implied.
 - **Host-agnostic:** the canonical skills are plain files, not logic trapped inside one agent runtime.
 - **Forkable:** everything is MIT licensed, so teams can review and adapt the workflows to their own standards.
@@ -113,7 +119,8 @@ Marketing work gets unreliable when every request goes through the same vague pr
 | [`paid-ads-review`](paid-ads/paid-ads-review/) | Creates comparable weekly or monthly scorecards and checks tracking health. |
 | [`paid-ads-optimize`](paid-ads/paid-ads-optimize/) | Finds waste and pacing problems, then proposes narrow, reversible changes. |
 | [`paid-ads-creative`](paid-ads/paid-ads-creative/) | Develops cross-channel concepts, claim ledgers, fatigue hypotheses, and test briefs. |
-| [`paid-ads-linkedin`](paid-ads/paid-ads-linkedin/) | Plans or reviews LinkedIn Ads around qualified pipeline outcomes. |
+| [`paid-ads-x`](paid-ads/paid-ads-x/) | Audits and operates connected X Ads campaigns, line items, targeting, creative, audiences, and budgets. |
+| [`paid-ads-linkedin`](paid-ads/paid-ads-linkedin/) | Audits and operates connected LinkedIn Ads around qualified pipeline outcomes. |
 | [`paid-ads-tiktok`](paid-ads/paid-ads-tiktok/) | Creates TikTok campaign plans, creator briefs, and short-form experiments. |
 | [`paid-ads-amazon`](paid-ads/paid-ads-amazon/) | Plans and reviews Amazon Ads with margin-aware ACoS guardrails. |
 | [`paid-ads-chatgpt`](paid-ads/paid-ads-chatgpt/) | Designs bounded ChatGPT Ads experiments or reviews verified exports. |
@@ -138,6 +145,13 @@ Marketing work gets unreliable when every request goes through the same vague pr
 | [`meta-ads`](meta-ads/manage/) | Reviews Facebook and Instagram performance and executes supported campaign operations. |
 | [`meta-ads-creative`](meta-ads/creative/) | Produces evidence-based concepts, copy angles, UGC briefs, and refresh experiments. |
 
+### Analytics
+
+| Skill | What it does |
+|---|---|
+| [`google-analytics`](analytics/google-analytics/) | Analyzes live GA4 acquisition, engagement, pages, events, and conversions and safely manages supported measurement configuration. |
+| [`search-console`](analytics/search-console/) | Analyzes live Search Console queries and pages, inspects URLs, and manages approved sitemap submissions. |
+
 ### Cross-model review and maintenance
 
 | Skill | What it does |
@@ -151,15 +165,18 @@ Some skills work entirely from a repository, URL, or supplied export. Live accou
 
 | Data source | Used for | Connection |
 |---|---|---|
-| **Google Search Console** | Search performance, queries, pages, indexing, and traffic changes | Google OAuth |
+| **Google Search Console** | Search performance, queries, pages, indexing, URL inspection, and sitemaps | [NotFair Search Console MCP](https://notfair.co/api/mcp/google_search_console) via OAuth |
+| **Google Analytics 4** | Acquisition, engagement, landing pages, events, conversions, realtime, and measurement configuration | [NotFair Google Analytics MCP](https://notfair.co/api/mcp/google_analytics) via OAuth |
 | **Google Ads** | Campaign performance, search terms, bids, budgets, keywords, and change history | [NotFair Google Ads MCP](https://notfair.co) via OAuth |
 | **Meta Ads** | Facebook and Instagram campaigns, ad sets, creatives, and insights | [NotFair Meta Ads MCP](https://notfair.co) via OAuth |
+| **X Ads** | Campaigns, line items, performance, targeting, promoted posts, audiences, and approved mutations | [NotFair X Ads MCP](https://notfair.co/api/mcp/x_ads) via OAuth |
+| **LinkedIn Ads** | Campaign groups, campaigns, creatives, analytics, targeting, conversions, and leads | [NotFair LinkedIn Ads MCP](https://notfair.co/api/mcp/linkedin_ads) via OAuth |
 | **CMS platforms** | Content and SEO-field review in WordPress, Strapi, Contentful, or Ghost | Platform API or compatible MCP |
 | **Google Gemini** | Cross-model review | Gemini API key |
 
-Google Ads and Meta Ads use explicit, bounded mutation tools. LinkedIn, TikTok, Amazon, and ChatGPT Ads remain planning or export-review workflows unless the current agent session exposes a verified connector.
+Google Ads, Meta Ads, X Ads, and LinkedIn Ads use explicit, bounded mutation tools. Search Console and GA4 also expose narrow configuration writes with approval and read-back rules. TikTok, Amazon, and ChatGPT Ads remain planning or export-review workflows unless the current agent session exposes a verified connector.
 
-Inside a skill, connectors use tool-agnostic placeholders such as `~~google-ads`, `~~meta-ads`, `~~search-console`, and `~~cms`. The agent resolves each placeholder to a compatible tool available in the current session, so the workflow is not coupled to one MCP implementation.
+Inside a skill, connectors use tool-agnostic placeholders such as `~~google-ads`, `~~meta-ads`, `~~x-ads`, `~~linkedin-ads`, `~~search-console`, `~~google-analytics`, and `~~cms`. The agent resolves each placeholder to a compatible tool available in the current session, so the workflow is not coupled to one MCP namespace.
 
 ## How the repository is organized
 
@@ -170,6 +187,7 @@ notfair-plugin/
 ├── paid-ads/                    # cross-channel planning, review, optimization
 ├── google-ads/                  # audit, management, copy, assets, landing pages
 ├── meta-ads/                    # audit, management, creative
+├── analytics/                   # Google Analytics and Search Console MCP workflows
 ├── seo/                         # SEO, GEO, content, and technical-search skills
 ├── gemini/                      # cross-model review
 ├── test/                        # unit and LLM-judge evals

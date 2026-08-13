@@ -55,6 +55,7 @@ SKILL_ENTRIES=(
   "paid-ads-review:paid-ads/paid-ads-review"
   "paid-ads-optimize:paid-ads/paid-ads-optimize"
   "paid-ads-creative:paid-ads/paid-ads-creative"
+  "paid-ads-x:paid-ads/paid-ads-x"
   "paid-ads-linkedin:paid-ads/paid-ads-linkedin"
   "paid-ads-tiktok:paid-ads/paid-ads-tiktok"
   "paid-ads-amazon:paid-ads/paid-ads-amazon"
@@ -67,6 +68,8 @@ SKILL_ENTRIES=(
   "meta-ads:meta-ads/manage"
   "meta-ads-audit:meta-ads/audit"
   "meta-ads-creative:meta-ads/creative"
+  "google-analytics:analytics/google-analytics"
+  "search-console:analytics/search-console"
   "seo-analysis:seo/seo-analysis"
   "content-writer:seo/content-writer"
   "content-planner:seo/content-planner"
@@ -99,12 +102,16 @@ skill_path() { echo "${1#*:}"; }
 # list intentional so the installer test validates every registered skill while
 # still requiring fixtures for skills that ship them.
 EVAL_SKILL_ENTRIES=(
+  "paid-ads-x:paid-ads/paid-ads-x"
+  "paid-ads-linkedin:paid-ads/paid-ads-linkedin"
   "google-ads:google-ads/manage"
   "google-ads-audit:google-ads/audit"
   "google-ads-copy:google-ads/copy"
   "google-ads-assets:google-ads/assets"
   "google-ads-landing:google-ads/landing"
   "meta-ads-creative:meta-ads/creative"
+  "google-analytics:analytics/google-analytics"
+  "search-console:analytics/search-console"
   "seo-analysis:seo/seo-analysis"
   "content-writer:seo/content-writer"
   "content-planner:seo/content-planner"
@@ -182,7 +189,7 @@ for entry in "${SKILL_ENTRIES[@]}"; do
 done
 
 # Guard: actual SKILL.md count must match
-actual_skill_count=$(find "$REPO_ROOT/paid-ads" "$REPO_ROOT/google-ads" "$REPO_ROOT/seo" "$REPO_ROOT/meta-ads" "$REPO_ROOT/notfair-upgrade-skill" "$REPO_ROOT/gemini" -name "SKILL.md" | wc -l | tr -d ' ')
+actual_skill_count=$(find "$REPO_ROOT/paid-ads" "$REPO_ROOT/google-ads" "$REPO_ROOT/seo" "$REPO_ROOT/meta-ads" "$REPO_ROOT/analytics" "$REPO_ROOT/notfair-upgrade-skill" "$REPO_ROOT/gemini" -name "SKILL.md" | wc -l | tr -d ' ')
 if [ "$actual_skill_count" -ne "${#SKILL_ENTRIES[@]}" ]; then
   fail "Expected ${#SKILL_ENTRIES[@]} SKILL.md files but found $actual_skill_count"
 else
@@ -229,6 +236,7 @@ echo "=== 4. Shared preambles ==="
 assert_file "$REPO_ROOT/google-ads/shared/preamble.md" "Google Ads shared preamble exists"
 assert_file "$REPO_ROOT/meta-ads/shared/preamble.md" "Meta Ads shared preamble exists"
 assert_file "$REPO_ROOT/seo/shared/preamble.md" "SEO shared preamble exists"
+assert_file "$REPO_ROOT/analytics/shared/operating-contract.md" "Analytics shared operating contract exists"
 
 # Ads skills reference the shared preamble (not inline MCP detection)
 for skill in manage audit copy assets; do
@@ -255,6 +263,14 @@ echo "=== 5. MCP server config ==="
 assert_contains "$REPO_ROOT/.mcp.json" "\"NotFair-GoogleAds\"" ".mcp.json registers the NotFair-GoogleAds server"
 assert_contains "$REPO_ROOT/.mcp.json" "\"type\": \"http\"" ".mcp.json uses native HTTP transport (no mcp-remote bridge)"
 assert_contains "$REPO_ROOT/.mcp.json" "notfair.co/api/mcp/google_ads" ".mcp.json points at NotFair-GoogleAds MCP endpoint"
+assert_contains "$REPO_ROOT/.mcp.json" "\"NotFair-XAds\"" ".mcp.json registers the NotFair-XAds server"
+assert_contains "$REPO_ROOT/.mcp.json" "notfair.co/api/mcp/x_ads" ".mcp.json points at the X Ads MCP endpoint"
+assert_contains "$REPO_ROOT/.mcp.json" "\"NotFair-LinkedInAds\"" ".mcp.json registers the NotFair-LinkedInAds server"
+assert_contains "$REPO_ROOT/.mcp.json" "notfair.co/api/mcp/linkedin_ads" ".mcp.json points at the LinkedIn Ads MCP endpoint"
+assert_contains "$REPO_ROOT/.mcp.json" "\"NotFair-GoogleSearchConsole\"" ".mcp.json registers the canonical Search Console server"
+assert_contains "$REPO_ROOT/.mcp.json" "notfair.co/api/mcp/google_search_console" ".mcp.json points at the Search Console MCP endpoint"
+assert_contains "$REPO_ROOT/.mcp.json" "\"NotFair-GoogleAnalytics\"" ".mcp.json registers the NotFair-GoogleAnalytics server"
+assert_contains "$REPO_ROOT/.mcp.json" "notfair.co/api/mcp/google_analytics" ".mcp.json points at the Google Analytics MCP endpoint"
 
 # ─── Test 6: Connectors section in README ─────────────────────
 
@@ -263,6 +279,9 @@ echo "=== 6. Connectors ==="
 
 assert_contains "$REPO_ROOT/README.md" "~~google-ads" "README.md has Google Ads connector placeholder"
 assert_contains "$REPO_ROOT/README.md" "~~search-console" "README.md has Search Console connector placeholder"
+assert_contains "$REPO_ROOT/README.md" "~~google-analytics" "README.md has Google Analytics connector placeholder"
+assert_contains "$REPO_ROOT/README.md" "~~x-ads" "README.md has X Ads connector placeholder"
+assert_contains "$REPO_ROOT/README.md" "~~linkedin-ads" "README.md has LinkedIn Ads connector placeholder"
 
 # ─── Test 7: Reference docs exist ───────────────────────────
 

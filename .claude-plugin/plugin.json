@@ -1,7 +1,7 @@
 {
   "name": "notfair",
-  "version": "0.25.11",
-  "description": "The official Google Ads + Meta Ads + SEO + GEO plugin from NotFair. SEO analysis, Google Ads management, Meta (Facebook + Instagram) Ads management, keyword research, content optimization, schema markup tools, broken link checker, single-page deep audit, and Generative Engine Optimization (GEO) for AI search engines — powered by Google Search Console, Google Ads, and Meta Marketing APIs.",
+  "version": "0.26.0",
+  "description": "The official ads, analytics, SEO, and GEO plugin from NotFair. Operate Google, Meta, X, and LinkedIn Ads; analyze Google Search Console and GA4; and run open-source search and content workflows from any compatible agent.",
   "author": {
     "name": "NotFair",
     "url": "https://notfair.co"
@@ -15,6 +15,7 @@
     "./paid-ads/paid-ads-review",
     "./paid-ads/paid-ads-optimize",
     "./paid-ads/paid-ads-creative",
+    "./paid-ads/paid-ads-x",
     "./paid-ads/paid-ads-linkedin",
     "./paid-ads/paid-ads-tiktok",
     "./paid-ads/paid-ads-amazon",
@@ -27,6 +28,8 @@
     "./meta-ads/manage",
     "./meta-ads/audit",
     "./meta-ads/creative",
+    "./analytics/google-analytics",
+    "./analytics/search-console",
     "./seo/seo-analysis",
     "./seo/content-writer",
     "./seo/content-planner",

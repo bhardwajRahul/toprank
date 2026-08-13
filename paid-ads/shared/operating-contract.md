@@ -13,14 +13,16 @@ Read this before any paid-media analysis, recommendation, or mutation.
 
 ## Capability boundary
 
-NotFair currently exposes first-party MCP operating surfaces for Google Ads and Meta Ads. Route live work to the existing skills instead of recreating their procedures:
+NotFair currently exposes first-party MCP operating surfaces for Google Ads, Meta Ads, X Ads, and LinkedIn Ads. Route live work to the platform skill instead of recreating its procedures:
 
 | Need | Use |
 |---|---|
 | Google Ads account setup, audit, management, copy, assets, or landing-page diagnosis | `/notfair:google-ads-audit`, `/notfair:google-ads`, `/notfair:google-ads-copy`, `/notfair:google-ads-assets`, or `/notfair:google-ads-landing` |
 | Meta account setup, audit, management, or creative briefs | `/notfair:meta-ads-audit`, `/notfair:meta-ads`, or `/notfair:meta-ads-creative` |
+| X Ads account analysis, campaigns, line items, targeting, creative, audiences, or mutations | `/notfair:paid-ads-x` |
+| LinkedIn Ads account analysis, campaign groups, campaigns, creatives, targeting, conversions, leads, or mutations | `/notfair:paid-ads-linkedin` |
 
-For LinkedIn, TikTok, Amazon, and ChatGPT Ads, this plugin does not currently declare a NotFair MCP mutation surface. Treat those skills as planning and evidence-review workflows unless the current session exposes a verified connector. Never invent tool names, account access, platform limits, or a published campaign. Ask for an export, a read-only connector, or a human operator in the platform UI when needed.
+For TikTok, Amazon, and ChatGPT Ads, this plugin does not currently declare a NotFair MCP mutation surface. Treat those skills as planning and evidence-review workflows unless the current session exposes a verified connector. Never invent tool names, account access, platform limits, or a published campaign. Ask for an export, a read-only connector, or a human operator in the platform UI when needed.
 
 ## Reviewable artifacts
 

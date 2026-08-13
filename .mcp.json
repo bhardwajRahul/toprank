@@ -8,9 +8,21 @@
       "type": "http",
       "url": "https://notfair.co/api/mcp/meta_ads"
     },
-    "NotFair-SearchConsole": {
+    "NotFair-XAds": {
+      "type": "http",
+      "url": "https://notfair.co/api/mcp/x_ads"
+    },
+    "NotFair-LinkedInAds": {
+      "type": "http",
+      "url": "https://notfair.co/api/mcp/linkedin_ads"
+    },
+    "NotFair-GoogleSearchConsole": {
       "type": "http",
       "url": "https://notfair.co/api/mcp/google_search_console"
+    },
+    "NotFair-GoogleAnalytics": {
+      "type": "http",
+      "url": "https://notfair.co/api/mcp/google_analytics"
     }
   }
 }

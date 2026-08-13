@@ -11,6 +11,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- **X Ads, LinkedIn Ads, GA4, and Search Console MCP skills (v0.26.0).** Added a live X Ads operator plus dedicated Google Analytics and Search Console workflows, and upgraded the existing LinkedIn skill from export-first planning to live read/write operation. Registered the four sibling-server endpoints in `.mcp.json`, expanded cross-channel routing and approval guardrails, added reproducible live OAuth-discovery end-to-end coverage, and refreshed the public skill/integration catalog.
+
 - **Cross-channel paid-ads skills (v0.25.11).** Added an evidence-first paid-media router plus guide, setup, integration, launch, review, optimization, creative, LinkedIn, TikTok, Amazon, and ChatGPT Ads workflows. Google and Meta requests route to the established NotFair operator skills; platforms without a declared NotFair MCP surface remain explicitly plan/review-only until a verified connector is available. Every workflow carries shared approval, measurement, and publication-status guardrails.
 
 - **Evidence-based ads creative and assets (v0.25.10).** Added `/google-ads-assets` for reviewable extension, image-asset, and PMax production briefs, and `/meta-ads-creative` for grounded Facebook/Instagram concept slates and refresh tests. Both distinguish an approved brief from a published asset and keep unsupported claims, rights, and MCP capability boundaries explicit.
