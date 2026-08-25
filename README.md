@@ -56,6 +56,23 @@ You can also use plain language:
 
 > Review last month's ad spend and show me the safest opportunities to improve ROAS.
 
+### Cursor
+
+Install **NotFair** from Cursor's plugin marketplace. The plugin loads the
+open-source marketing skills in this repository and registers one hosted
+NotFair MCP connection. Complete the browser OAuth flow when Cursor prompts
+you, then ask Cursor to audit an ad account, analyze GA4 or Search Console, or
+run one of the SEO and GEO workflows listed below.
+
+For local testing before the marketplace listing is available, clone this
+repository into Cursor's local plugin directory:
+
+```bash
+git clone https://github.com/nowork-studio/notfair-plugin.git ~/.cursor/plugins/local/notfair
+```
+
+Restart Cursor after installing or updating the local plugin.
+
 ### Codex, Hermes, and other agents
 
 Install the universal NotFair plugin directly through Codex:
