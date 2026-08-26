@@ -73,6 +73,24 @@ git clone https://github.com/nowork-studio/notfair-plugin.git ~/.cursor/plugins/
 
 Restart Cursor after installing or updating the local plugin.
 
+### Kiro Powers
+
+Install the public repository as a custom power from Kiro's Powers panel, or
+find **NotFair** in the Powers registry after its listing is approved. The root
+[`plugin.json`](plugin.json) and [`mcp.json`](mcp.json) follow the Agent Plugins
+1.0 specification.
+
+### Gemini CLI
+
+Install the extension directly from GitHub:
+
+```bash
+gemini extensions install https://github.com/nowork-studio/notfair-plugin
+```
+
+The extension loads the repository guidance and the universal NotFair MCP. Run
+`/mcp auth NotFair` in Gemini CLI when authentication is requested.
+
 ### Codex, Hermes, and other agents
 
 Install the universal NotFair plugin directly through Codex:
@@ -204,6 +222,12 @@ Some skills work entirely from a repository, URL, or supplied export. Live accou
 | **Google Gemini** | Cross-model review | Gemini API key |
 
 Google Ads, Meta Ads, X Ads, and LinkedIn Ads use explicit, bounded mutation tools. Search Console and GA4 also expose narrow configuration writes with approval and read-back rules. TikTok, Amazon, and ChatGPT Ads remain planning or export-review workflows unless the current agent session exposes a verified connector.
+
+## Privacy and support
+
+- [Privacy Policy](https://notfair.co/privacy)
+- [Support and community](https://discord.gg/gVJCRczpps)
+- [Issue tracker](https://github.com/nowork-studio/notfair-plugin/issues)
 
 Inside a skill, connectors use tool-agnostic placeholders such as `~~google-ads`, `~~meta-ads`, `~~x-ads`, `~~linkedin-ads`, `~~search-console`, `~~google-analytics`, and `~~cms`. The agent resolves each placeholder to a compatible tool available in the current session, so the workflow is not coupled to one MCP namespace.
 

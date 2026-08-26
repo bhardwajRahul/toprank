@@ -1,6 +1,6 @@
 {
   "name": "notfair",
-  "version": "0.27.0",
+  "version": "0.27.1",
   "description": "The official ads, analytics, SEO, and GEO plugin from NotFair.",
   "author": {
     "name": "NotFair",
@@ -17,7 +17,7 @@
     "seo"
   ],
   "skills": "./skills/",
-  "mcpServers": "./.mcp.json",
+  "mcpServers": "./mcp.json",
   "interface": {
     "displayName": "NotFair",
     "shortDescription": "Operate ads and analyze search performance.",

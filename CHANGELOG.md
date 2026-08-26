@@ -11,6 +11,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- **Portable agent marketplace manifests (v0.27.1).** Added Agent Plugins 1.0 manifests for Kiro Powers and compatible hosts, a Gemini CLI extension manifest for automatic gallery discovery, and universal NotFair Ads metadata for the official MCP Registry. Cursor and Codex now share the standards-based root MCP manifest.
+
 - **X Ads, LinkedIn Ads, GA4, and Search Console MCP skills (v0.26.0).** Added a live X Ads operator plus dedicated Google Analytics and Search Console workflows, and upgraded the existing LinkedIn skill from export-first planning to live read/write operation. Registered the four sibling-server endpoints in `.mcp.json`, expanded cross-channel routing and approval guardrails, added reproducible live OAuth-discovery end-to-end coverage, and refreshed the public skill/integration catalog.
 
 - **Cross-channel paid-ads skills (v0.25.11).** Added an evidence-first paid-media router plus guide, setup, integration, launch, review, optimization, creative, LinkedIn, TikTok, Amazon, and ChatGPT Ads workflows. Google and Meta requests route to the established NotFair operator skills; platforms without a declared NotFair MCP surface remain explicitly plan/review-only until a verified connector is available. Every workflow carries shared approval, measurement, and publication-status guardrails.
