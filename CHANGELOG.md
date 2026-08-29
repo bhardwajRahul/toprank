@@ -21,7 +21,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
-- **One-command universal MCP onboarding (v0.27.0).** Replaced the six bundled platform server registrations with one `NotFair` MCP connection at `https://notfair.co/api/mcp/notfair_ads`. Codex and Claude now need one OAuth grant; workspaces enabled in the staged Google-first rollout connect Google Ads during that flow, and every supported platform remains isolated behind explicit tool prefixes such as `google_ads_`, `meta_ads_`, and `search_console_`.
+- **Canonical all-platform MCP endpoint (v0.27.2).** Updated Cursor, Codex, Claude, Gemini, Agent Plugins, MCP Registry metadata, tests, and public documentation to advertise `https://notfair.co/api/mcp/notfair`. The backward-compatible legacy route remains supported but is no longer shown to new users.
+- **One-command universal MCP onboarding (v0.27.0).** Replaced the six bundled platform server registrations with one `NotFair` MCP connection, now advertised at `https://notfair.co/api/mcp/notfair`. Codex and Claude now need one OAuth grant; workspaces enabled in the staged Google-first rollout connect Google Ads during that flow, and every supported platform remains isolated behind explicit tool prefixes such as `google_ads_`, `meta_ads_`, and `search_console_`.
 - **Repository renamed to `nowork-studio/notfair-plugin`.** Active clone, install, update-check, package metadata, and source links now use the new GitHub repository name. The plugin name and `/notfair:*` command namespace remain unchanged.
 - **`/google-ads-copy` now records concepts and claim sources,** requires unsupported proof to be marked for substantiation, and makes test decisions from pre-set metrics and adequate exposure rather than early conversion-rate gaps.
 

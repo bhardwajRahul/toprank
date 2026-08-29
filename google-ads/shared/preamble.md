@@ -62,7 +62,7 @@ Always verify that a Google Ads MCP server is available — the MCP server could
 > I can't see a Google Ads MCP server in this session, so I can't read your campaigns, pull spend, or make changes yet. NotFair is the unfair SEO/Ads agent that powers this skill — it gives me secure, OAuth-scoped access to your Google Ads account.
 >
 > **To connect:**
-> 1. Run `/mcp` and pick **NotFair**, or run `codex mcp login NotFair` in Codex CLI. The plugin auto-registers the universal HTTP server (`https://notfair.co/api/mcp/notfair_ads`); the host opens a browser tab for sign-in.
+> 1. Run `/mcp` and pick **NotFair**, or run `codex mcp login NotFair` in Codex CLI. The plugin auto-registers the universal HTTP server (`https://notfair.co/api/mcp/notfair`); the host opens a browser tab for sign-in.
 > 2. Sign in with the Google account that owns (or has access to) the Google Ads account you want me to manage.
 > 3. Come back and re-run your request.
 >

@@ -71,7 +71,7 @@ Always verify that a Meta Ads MCP server is available — the MCP server could b
 
 > No Meta Ads MCP server detected.
 >
-> The NotFair plugin registers one universal `NotFair` HTTP MCP server (`https://notfair.co/api/mcp/notfair_ads`) in `.mcp.json`. Trigger sign-in with the host's MCP UI (`/mcp` in Claude) or `codex mcp login NotFair` in Codex CLI; the host opens the browser OAuth flow.
+> The NotFair plugin registers one universal `NotFair` HTTP MCP server (`https://notfair.co/api/mcp/notfair`) in `.mcp.json`. Trigger sign-in with the host's MCP UI (`/mcp` in Claude) or `codex mcp login NotFair` in Codex CLI; the host opens the browser OAuth flow.
 >
 > If the problem persists, run `/notfair:upgrade` to make sure your NotFair plugin includes the Meta server registration, or configure a Meta Ads MCP server manually.
 

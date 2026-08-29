@@ -19,7 +19,7 @@ import pytest
 ROOT = Path(__file__).parent.parent
 
 UNIVERSAL_SERVER = "NotFair"
-UNIVERSAL_ENDPOINT = "https://notfair.co/api/mcp/notfair_ads"
+UNIVERSAL_ENDPOINT = "https://notfair.co/api/mcp/notfair"
 
 PLATFORM_SKILLS = {
     "paid-ads/paid-ads-x": ("~~x-ads", "x_ads_"),
@@ -45,7 +45,7 @@ def test_universal_mcp_is_the_only_registered_server_and_skills_use_platform_pre
     }
     assert codex_plugin["name"] == "notfair"
     assert codex_plugin["skills"] == "./skills/"
-    assert codex_plugin["mcpServers"] == "./.mcp.json"
+    assert codex_plugin["mcpServers"] == "./mcp.json"
     assert codex_plugin["version"] == plugin["version"]
 
     codex_wrappers = {path.name: path for path in (ROOT / "skills").iterdir()}
@@ -109,7 +109,7 @@ def test_live_mcp_oauth_discovery_round_trip():
 
     assert metadata["resource"] == endpoint
     assert metadata["authorization_servers"] == ["https://notfair.co"]
-    assert metadata["resource_name"].startswith("NotFair ")
+    assert metadata["resource_name"] == "NotFair"
 
     authorization_server = metadata["authorization_servers"][0]
     authorization_metadata_url = (

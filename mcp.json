@@ -3,7 +3,7 @@
   "mcpServers": {
     "NotFair": {
       "type": "http",
-      "url": "https://notfair.co/api/mcp/notfair_ads"
+      "url": "https://notfair.co/api/mcp/notfair"
     }
   }
 }

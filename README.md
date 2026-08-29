@@ -208,7 +208,7 @@ Marketing work gets unreliable when every request goes through the same vague pr
 
 ## Live data and integrations
 
-Some skills work entirely from a repository, URL, or supplied export. Live account analysis uses one OAuth-connected [universal NotFair MCP](https://notfair.co/api/mcp/notfair_ads). The plugin registers that connection automatically. During the staged Google-first rollout, enabled workspaces connect Google Ads in the same OAuth flow; every other platform becomes available after it is connected in the selected NotFair workspace.
+Some skills work entirely from a repository, URL, or supplied export. Live account analysis uses one OAuth-connected [universal NotFair MCP](https://notfair.co/api/mcp/notfair). The plugin registers that connection automatically. During the staged Google-first rollout, enabled workspaces connect Google Ads in the same OAuth flow; every other platform becomes available after it is connected in the selected NotFair workspace.
 
 | Data source | Used for | Connection |
 |---|---|---|
