@@ -274,7 +274,7 @@ echo ""
 echo "=== 5. MCP server config ==="
 
 assert_file "$REPO_ROOT/.codex-plugin/plugin.json" "Codex plugin manifest exists"
-assert_contains "$REPO_ROOT/.codex-plugin/plugin.json" '"mcpServers": "./mcp.json"' "Codex manifest loads the portable MCP config"
+assert_contains "$REPO_ROOT/.codex-plugin/plugin.json" '"mcpServers": "./.mcp.json"' "Codex manifest loads the native MCP config"
 assert_contains "$REPO_ROOT/.codex-plugin/plugin.json" '"skills": "./skills/"' "Codex manifest loads the canonical skill index"
 assert_contains "$REPO_ROOT/.mcp.json" "\"NotFair\"" ".mcp.json registers the universal NotFair server"
 assert_contains "$REPO_ROOT/.mcp.json" "\"type\": \"http\"" ".mcp.json uses native HTTP transport (no mcp-remote bridge)"

@@ -83,7 +83,9 @@ Read `AGENTS.md` at the repo root. It contains the full intent → skill routing
 
 ## Step 4 — Connect external services
 
-The plugin registers one universal NotFair MCP server at `https://notfair.co/api/mcp/notfair`. The Codex install command above explicitly starts its native OAuth flow; other hosts prompt on install or first use. The user signs in once and selects a NotFair workspace. During the staged Google-first rollout, enabled workspaces also connect Google Ads when they do not already have an active account. Google Ads, Meta Ads, X Ads, LinkedIn Ads, Search Console, Google Analytics, and GoHighLevel then appear as platform-prefixed tools through that one connection.
+The plugin registers one universal NotFair MCP server at `https://notfair.co/api/mcp/notfair`. The Codex install command above explicitly starts its native OAuth flow; other hosts prompt on install or first use. The user signs in once and selects a NotFair workspace. Follow any account setup guidance in the OAuth flow; connect additional platforms inside the selected workspace. Google Ads, Meta Ads, X Ads, LinkedIn Ads, Search Console, Google Analytics, and GoHighLevel are available as capabilities through that one connection.
+
+Follow [`docs/mcp-connection.md`](docs/mcp-connection.md) and the live server's instructions to discover the capabilities needed for the task and verify platform access. When upgrading, replace manually configured per-platform entries with the single `NotFair` connection and reauthorize when prompted.
 
 NotFair skills depend on external APIs. Walk the user through whichever they need:
 

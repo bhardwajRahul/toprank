@@ -208,20 +208,23 @@ Marketing work gets unreliable when every request goes through the same vague pr
 
 ## Live data and integrations
 
-Some skills work entirely from a repository, URL, or supplied export. Live account analysis uses one OAuth-connected [universal NotFair MCP](https://notfair.co/api/mcp/notfair). The plugin registers that connection automatically. During the staged Google-first rollout, enabled workspaces connect Google Ads in the same OAuth flow; every other platform becomes available after it is connected in the selected NotFair workspace.
+Some skills work entirely from a repository, URL, or supplied export. Live account analysis uses one OAuth-connected [universal NotFair MCP](https://notfair.co/api/mcp/notfair). The plugin registers exactly one server named **NotFair**, shared by every supported platform.
+
+The agent chooses tools from the live server's instructions and capability descriptions. Skills supply marketing workflows and evidence standards without hardcoding MCP tool names or call sequences. See [the connection and upgrade guide](docs/mcp-connection.md) for manual configuration and migration from older per-platform connections. Each platform becomes available after it is connected in the NotFair workspace selected during OAuth. Follow any account setup guidance returned by the server.
 
 | Data source | Used for | Connection |
 |---|---|---|
-| **Google Search Console** | Search performance, queries, pages, indexing, URL inspection, and sitemaps | Universal NotFair MCP via `search_console_` tools |
-| **Google Analytics 4** | Acquisition, engagement, landing pages, events, conversions, realtime, and measurement configuration | Universal NotFair MCP via `google_analytics_` tools |
-| **Google Ads** | Campaign performance, search terms, bids, budgets, keywords, and change history | Universal NotFair MCP via `google_ads_` tools |
-| **Meta Ads** | Facebook and Instagram campaigns, ad sets, creatives, and insights | Universal NotFair MCP via `meta_ads_` tools |
-| **X Ads** | Campaigns, line items, performance, targeting, promoted posts, audiences, and approved mutations | Universal NotFair MCP via `x_ads_` tools |
-| **LinkedIn Ads** | Campaign groups, campaigns, creatives, analytics, targeting, conversions, and leads | Universal NotFair MCP via `linkedin_ads_` tools |
+| **Google Search Console** | Search performance, queries, pages, indexing, URL inspection, and sitemaps | One NotFair connection |
+| **Google Analytics 4** | Acquisition, engagement, landing pages, events, conversions, realtime, and measurement configuration | One NotFair connection |
+| **Google Ads** | Campaign performance, search terms, bids, budgets, keywords, and change history | One NotFair connection |
+| **Meta Ads** | Facebook and Instagram campaigns, ad sets, creatives, and insights | One NotFair connection |
+| **X Ads** | Campaigns, line items, performance, targeting, promoted posts, audiences, and approved mutations | One NotFair connection |
+| **LinkedIn Ads** | Campaign groups, campaigns, creatives, analytics, targeting, conversions, and leads | One NotFair connection |
+| **GoHighLevel** | Connected CRM and downstream lead workflows | One NotFair connection |
 | **CMS platforms** | Content and SEO-field review in WordPress, Strapi, Contentful, or Ghost | Platform API or compatible MCP |
 | **Google Gemini** | Cross-model review | Gemini API key |
 
-Google Ads, Meta Ads, X Ads, and LinkedIn Ads use explicit, bounded mutation tools. Search Console and GA4 also expose narrow configuration writes with approval and read-back rules. TikTok, Amazon, and ChatGPT Ads remain planning or export-review workflows unless the current agent session exposes a verified connector.
+Supported account operations come from the live connection. Changes must stay within the user's authorization and be verified against the resulting account state. TikTok, Amazon, and ChatGPT Ads remain planning or export-review workflows unless the current agent session exposes a verified connector.
 
 ## Privacy and support
 

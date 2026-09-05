@@ -12,13 +12,13 @@ Use for: "check today's keyword", "what spent today", "overview and proposal", s
 
 ### Pull once
 
-Use one `runScript` / `gaqlParallel` pass. Include:
+Use available read capabilities and batch related data when useful. Consider:
 
 - Campaign metrics for today, yesterday, 7d, and 30d.
 - Keyword metrics for the active/recent day.
 - Search terms for the active/recent day.
 - Campaign budgets, bidding strategy, search lost IS budget/rank, top IS / absolute top IS where available.
-- Recent NotFair `getChanges` or Google `change_event` for context.
+- Recent account change history for context.
 
 ### Interpret
 

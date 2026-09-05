@@ -17,7 +17,7 @@ Do NOT pull metrics or attempt to assess impact early — small sample sizes lea
 
 **If unreviewed changes exist AND `reviewAfter` has passed:**
 
-1. Pull current metrics for the affected campaigns over the last 7 days via a single `runScript` GAQL query against `campaign` filtered to those IDs. Use the `beforeSnapshot` from the change log as the baseline — only query the pre-change period directly if `beforeSnapshot.metrics` is null. Do this in parallel with the user's actual request, and reuse the resulting rows for the anomaly check below.
+1. Pull current metrics for the affected campaigns over the last 7 days using an available reporting capability scoped to those IDs. Use the `beforeSnapshot` from the change log as the baseline — only query the pre-change period directly if `beforeSnapshot.metrics` is null. Do this in parallel with the user's actual request, and reuse the resulting rows for the anomaly check below.
 
 2. Compute deltas: percentage change for spend, conversions, CPA, CTR.
 

@@ -15,14 +15,14 @@ Every daily operator pass must:
 
 ## Data to pull
 
-Prefer one `runScript` with `ads.gaqlParallel`:
+Choose the smallest useful set of available reads:
 
 - Account setup / conversion actions via `summarizeAccountSetup` or GAQL.
 - Campaign metrics for yesterday, last 7 days, and last 30 days when volume is low.
 - Keyword and search-term metrics for the active scope.
 - Impression-share fields for Search campaigns: budget lost vs rank lost.
 - Network/device/date segmentation when CPA/CVR shifted.
-- Recent change events or NotFair `getChanges` when explaining a regression.
+- Recent account change history when explaining a regression.
 - Active experiments/interventions when available.
 
 ## Output shape

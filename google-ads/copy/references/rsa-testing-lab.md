@@ -84,8 +84,8 @@ Default controlled structure:
 
 Preferred paths:
 
-- Use `createAdVariationExperiment` for clean RSA asset tests.
-- Use `createExperiment` + arms for broader ad+landing-page or structural tests.
+- Use a supported ad-variation experiment for controlled RSA asset tests.
+- Use a supported controlled experiment for broader ad, landing-page, or structural tests.
 - For very low-stakes / low-volume work, before/after can be acceptable, but report confounders.
 
 Minimum-read rules:

@@ -16,6 +16,7 @@ NotFair ships one source of truth for skills. Different agent hosts expect skill
 2. The adapter should:
    - Read skills from their canonical location (`seo/`, `google-ads/`, etc.) — do not copy them into per-host directories unless the host's loader requires it.
    - If the host requires copying, copy the minimum needed and link the rest.
+   - Register exactly one `NotFair` HTTP MCP connection at `https://notfair.co/api/mcp/notfair`; use the root `mcp.json` or `.mcp.json` as the source. Follow [`../docs/mcp-connection.md`](../docs/mcp-connection.md) for upgrades and capability discovery.
    - Write any host-specific configuration with **managed-block fences** (see below).
 3. Add a "host = `<host>`" branch to `../INSTALL_FOR_AGENTS.md` describing how the agent should invoke the adapter.
 4. Update `../AGENTS.md` if the host introduces new orchestrator skills (most hosts will not — they will route to the same canonical skills).

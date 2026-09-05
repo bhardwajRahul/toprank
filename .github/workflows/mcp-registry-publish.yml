@@ -1,15 +1,15 @@
-name: Publish Google Ads MCP registry metadata
+name: Publish NotFair MCP registry metadata
 
 on:
   push:
     branches: [main]
     paths:
-      - "server-google-ads.json"
+      - "server.json"
       - ".github/workflows/mcp-registry-publish.yml"
   workflow_dispatch:
 
 concurrency:
-  group: mcp-registry-google-ads
+  group: mcp-registry-notfair
   cancel-in-progress: false
 
 jobs:
@@ -35,10 +35,10 @@ jobs:
           chmod +x mcp-publisher
 
       - name: Validate registry metadata
-        run: ./mcp-publisher validate server-google-ads.json
+        run: ./mcp-publisher validate server.json
 
       - name: Authenticate with GitHub OIDC
         run: ./mcp-publisher login github-oidc
 
       - name: Publish registry metadata
-        run: ./mcp-publisher publish server-google-ads.json
+        run: ./mcp-publisher publish server.json

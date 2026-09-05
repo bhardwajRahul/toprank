@@ -23,7 +23,7 @@ Frequency      = Impressions / Reach
 CVR (LP)       = Landing Page Conversions / Landing Page Views × 100
 ```
 
-**Always disambiguate "CTR" and "clicks" in Meta reports.** Meta surfaces both `clicks (all)` (which counts every click on the ad including profile, like, see-more) and `link clicks` (clicks that send the user to the destination). Optimization decisions use **link** clicks — total clicks are vanity. When pulling from `getInsights`, request `clicks`, `inline_link_clicks`, `cpc`, `ctr`, and the breakdown actions you need; treat `inline_link_clicks` as the real click count.
+**Always disambiguate "CTR" and "clicks" in Meta reports.** Meta surfaces both `clicks (all)` (which counts every click on the ad including profile, like, see-more) and `link clicks` (clicks that send the user to the destination). Optimization decisions use **link** clicks — total clicks are vanity. When reading ad performance, include `clicks`, `inline_link_clicks`, `cpc`, `ctr`, and the breakdown actions you need; treat `inline_link_clicks` as the real click count.
 
 ---
 

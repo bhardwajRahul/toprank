@@ -49,7 +49,7 @@ Needs approval:
 Use the narrowest read that proves the state:
 
 - Negative keyword write → read campaign/ad-group/shared-set negatives.
-- Positive keyword add/pause → read `keyword_view` / `listKeywords` for criterion status and match type.
+- Positive keyword add/pause → read the current keyword criterion status and match type.
 - Bid/budget write → read campaign/ad group/keyword bidding field.
 - RSA update → read `ad_group_ad` responsive search ad assets.
 - Asset link/unlink → read asset links.

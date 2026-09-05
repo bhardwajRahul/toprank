@@ -41,7 +41,7 @@ Editing any of these triggers a relearn:
 
 1. **What is the ad set's current 7-day event volume?** If it's at 25 events / 7 days, it's halfway there — a budget bump may push it over. If it's at 5 events / 7 days, no realistic budget bump will clear the bar.
 
-2. **Is the optimization event firing reliably?** Pull `getInsights` with `actions` and confirm the event count matches what the user sees in Events Manager. A misconfigured Pixel makes the event invisible to Meta even when the actual event happened.
+2. **Is the optimization event firing reliably?** Read conversion-event performance and confirm the event count matches what the user sees in Events Manager. A misconfigured Pixel makes the event invisible to Meta even when the actual event happened.
 
 3. **Is the audience large enough?** Audiences below ~1M people often can't hit 50/7 at any reasonable budget — there are not enough qualified users in the pool. The fix is consolidating audiences, not patience.
 

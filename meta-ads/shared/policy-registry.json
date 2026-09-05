@@ -33,7 +33,7 @@
       "last_verified": "2026-05-01",
       "source": "Meta Marketing API docs",
       "source_url": "https://developers.facebook.com/docs/marketing-apis/",
-      "notes": "API versions are released regularly; field availability and naming can shift between versions. The `runScript` sandbox abstracts version selection but new fields require new versions.",
+      "notes": "API versions are released regularly; field availability and naming can shift between versions. Use the live connector documentation for supported fields and API-version constraints.",
       "stale_after_days": 365
     },
     {

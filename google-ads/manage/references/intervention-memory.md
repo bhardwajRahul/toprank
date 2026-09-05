@@ -26,13 +26,9 @@ Store or report enough detail for a future 3/7/14-day review:
 }
 ```
 
-Prefer NotFair server-side change/intervention surfaces when available:
-
-- `getChanges`
-- `listChangeInterventions`
-- `getChangeIntervention`
-- `evaluateChangeIntervention`
-- `reviewChangeImpact`
+Use durable change history or intervention tracking when the live connection
+supports it. Choose available capabilities for recording the change and comparing
+outcomes; do not assume that every operation is automatically logged.
 
 If the environment lacks durable intervention storage, include the record in the session report and recommend persisting it before scheduling automated reviews.
 

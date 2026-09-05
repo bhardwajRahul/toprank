@@ -209,16 +209,11 @@ that determines whether the post gets clicked on social.
 - The same image used decoratively in every section
 
 ### Image generation
-The agent should generate the images during the writing pass — don't hand the
-user a TODO list. Pick the first available surface:
-
-1. **Host-native image gen** (Codex `gpt-image`, Gemini Imagen, etc.) — use it
-   directly. Save to `images/` or the path the user picks.
-2. **NotFair MCP** — if a NotFair MCP is connected, `generate_image` produces
-   marketing-grade visuals from a prompt; works for blog imagery too.
-3. **No image-gen available** — emit the detailed prompt for each image along
-   with the markdown image tag (with the planned filename) so the post is ready
-   to slot the asset in.
+Use an appropriate image-generation capability available in the host or a
+connected service, following its current instructions. Save the generated assets
+to the user's chosen location. Do not assume an MCP supports image generation
+from its name. If no suitable capability exists, provide detailed prompts and
+clearly mark the assets as still needed.
 
 ### Writing an image prompt
 Every prompt names: subject, style (photographic / 3D render / flat illustration

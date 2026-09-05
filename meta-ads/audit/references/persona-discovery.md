@@ -9,7 +9,7 @@ Personas on Meta are different from Search-engine personas. On Search, you disco
 1. **Top-performing ad creatives** — the angle, format, and messaging of ads with highest ROAS / lowest CPA. The persona is the cohort the ad spoke to successfully.
 2. **Top-performing audiences** — which custom audiences and lookalike seeds convert best.
 3. **Landing page content** — which pages convert best from Meta traffic; the person on the page when conversion happens.
-4. **Demographic + placement breakdowns** — `getInsights` with `breakdowns=age,gender,publisher_platform`. Gives a coarse demographic skew.
+4. **Demographic + placement breakdowns** — use available reporting capabilities for age, gender, and publisher-platform breakdowns. Gives a coarse demographic skew.
 5. **Customer email list / Shopify data** — if the user has it, real customer data > inferred from ads.
 
 The agent should *triangulate* across at least 3 of these — a persona supported only by demographic skew is too weak.

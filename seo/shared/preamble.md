@@ -1,44 +1,25 @@
 # SEO Shared Preamble
 
-Every SEO skill reads this before doing anything else. It handles script discovery, GSC authentication, and site selection in one place — so individual skills don't repeat this logic.
+Match setup to the task. URL-only reviews and supplied exports do not require
+Search Console authentication. For live Search Console work, use an available
+connector and follow [`../../docs/mcp-connection.md`](../../docs/mcp-connection.md)
+for NotFair. Let the connection's current instructions and schemas determine
+tool selection, and confirm the intended property from live data.
 
-## Step 1: Check for cached GSC session
+## Optional local scripts
 
-If gcloud credentials already exist and the user has previously selected a GSC property in this session, skip to Step 4. Signs of a cached session:
-- `gcloud auth application-default print-access-token` succeeds silently
-- The target URL is already known from the conversation
+The repository also provides scripts under `seo/seo-analysis/scripts/` for
+crawling, local analysis, and direct Search Console access. Locate them relative
+to the installed skill directory and set `SKILL_SCRIPTS` to that directory when a
+workflow uses them. Choose the script or connected capability that fits the task;
+a script example in a workflow is not a requirement to replace a working MCP.
 
-If both are true, skip straight to Step 4.
+Only run `preflight.py` when the task actually needs the direct Google API script
+path and its dependencies are missing. This path uses gcloud credentials and
+Google Cloud setup; it is not required for NotFair MCP access. See
+`../seo-analysis/references/gsc_setup.md` for that optional setup. Do not install
+additional dependencies or start a second authentication flow just because an
+SEO skill was invoked.
 
-## Step 2: Locate skill scripts
-
-All SEO skills share the scripts in `seo-analysis/scripts/`. Locate them once:
-
-```bash
-SKILL_SCRIPTS=$(find ~/.claude/plugins ~/.claude/skills ~/.codex/skills .agents/skills -type d -name scripts -path "*seo-analysis*" 2>/dev/null | head -1)
-[ -z "$SKILL_SCRIPTS" ] && echo "ERROR: seo-analysis scripts not found" && exit 1
-```
-
-Use `$SKILL_SCRIPTS` for all subsequent script calls.
-
-## Step 3: Preflight — gcloud and GSC API
-
-Run the preflight check to ensure gcloud is installed, a GCP project exists, and the Search Console API is enabled:
-
-```bash
-python3 "$SKILL_SCRIPTS/preflight.py"
-```
-
-- **`OK: All dependencies ready.`** — continue to Step 4.
-- **Browser opens for Google login** — user needs to log in with the Google account that owns their Search Console properties. Preflight finishes automatically after login.
-- **`gcloud init` runs** — first-time user. The wizard walks them through setup. After it completes, preflight continues automatically.
-- **`Search Console API: enabled`** — preflight auto-enabled the API. No action needed.
-- **ERROR: Could not enable the Search Console API** — user needs to enable manually: `gcloud services enable searchconsole.googleapis.com`
-- **gcloud not found** — OS-specific install instructions are printed. Install gcloud, then re-run.
-- **No gcloud and user wants to skip GSC** — that is fine. GSC data won't be available, but skills can still operate on URL-only analysis (technical crawl, meta tags, schema).
-
-> **Reference**: For manual setup or troubleshooting, see `../seo-analysis/references/gsc_setup.md`.
-
-## Step 4: Proceed
-
-Scripts are located at `$SKILL_SCRIPTS`, auth is ready. All subsequent script calls in the invoking skill should use `$SKILL_SCRIPTS` directly — do not re-run the find command. Hand control back to the invoking skill.
+If live data is unavailable, explain the gap and continue the portions supported
+by the user's URL, repository, or export. Do not present missing data as zero.

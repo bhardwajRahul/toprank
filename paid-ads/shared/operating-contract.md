@@ -1,6 +1,6 @@
 # Paid Ads Operating Contract
 
-Read this before any paid-media analysis, recommendation, or mutation.
+Read this before any paid-media analysis, recommendation, or mutation. For live NotFair work, follow [`../../docs/mcp-connection.md`](../../docs/mcp-connection.md). Choose tools from the live connection and verify the requested platform and account. Keep reads and changes within their declared capability boundaries.
 
 ## Evidence and money
 
@@ -8,7 +8,7 @@ Read this before any paid-media analysis, recommendation, or mutation.
 2. Verify conversion tracking before declaring a CPA, ROAS, or waste finding actionable. If tracking is unverified, frame performance conclusions as provisional.
 3. Show the current state, proposed state, daily and implied monthly spend, scope, and expected observation window before a change that can affect delivery or spend.
 4. Obtain explicit approval for every spend-increasing action, campaign enablement, budget change, bid change, or irreversible deletion. Create campaigns paused where the connected platform supports creation; never assume that a plan is live.
-5. Use dedicated mutation tools only. Read the changed entity back and report the confirmed result, including any partial failure.
+5. Use capabilities whose current contract supports the requested change. Read the changed entity back and report the confirmed result, including any partial failure.
 6. Prefer the narrowest reversible intervention. Change one material variable at a time unless the user approves a bundled, clearly itemized operation.
 
 ## Capability boundary

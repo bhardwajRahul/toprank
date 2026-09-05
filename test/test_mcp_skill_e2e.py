@@ -22,19 +22,14 @@ UNIVERSAL_SERVER = "NotFair"
 UNIVERSAL_ENDPOINT = "https://notfair.co/api/mcp/notfair"
 
 PLATFORM_SKILLS = {
-    "paid-ads/paid-ads-x": ("~~x-ads", "x_ads_"),
-    "paid-ads/paid-ads-linkedin": ("~~linkedin-ads", "linkedin_ads_"),
-    "analytics/search-console": ("~~search-console", "search_console_"),
-    "analytics/google-analytics": ("~~google-analytics", "google_analytics_"),
-}
-
-UNIVERSAL_PREFLIGHTS = {
-    "google-ads/shared/preamble.md": "google_ads_listConnectedAccounts",
-    "meta-ads/shared/preamble.md": "meta_ads_listAdAccounts",
+    "paid-ads/paid-ads-x": "~~x-ads",
+    "paid-ads/paid-ads-linkedin": "~~linkedin-ads",
+    "analytics/search-console": "~~search-console",
+    "analytics/google-analytics": "~~google-analytics",
 }
 
 
-def test_universal_mcp_is_the_only_registered_server_and_skills_use_platform_prefixes():
+def test_universal_mcp_is_the_only_registered_server_and_skills_are_portable():
     config = json.loads((ROOT / ".mcp.json").read_text())
     plugin = json.loads((ROOT / ".claude-plugin/plugin.json").read_text())
     codex_plugin = json.loads((ROOT / ".codex-plugin/plugin.json").read_text())
@@ -45,7 +40,7 @@ def test_universal_mcp_is_the_only_registered_server_and_skills_use_platform_pre
     }
     assert codex_plugin["name"] == "notfair"
     assert codex_plugin["skills"] == "./skills/"
-    assert codex_plugin["mcpServers"] == "./mcp.json"
+    assert codex_plugin["mcpServers"] == "./.mcp.json"
     assert codex_plugin["version"] == plugin["version"]
 
     codex_wrappers = {path.name: path for path in (ROOT / "skills").iterdir()}
@@ -62,29 +57,65 @@ def test_universal_mcp_is_the_only_registered_server_and_skills_use_platform_pre
         canonical_rel = canonical.relative_to(ROOT).as_posix()
         assert f"../../{canonical_rel}/SKILL.md" in wrapper_text
 
-    for skill, (placeholder, platform_prefix) in PLATFORM_SKILLS.items():
+    for skill, placeholder in PLATFORM_SKILLS.items():
         skill_path = ROOT / skill / "SKILL.md"
         assert skill_path.is_file()
         skill_text = skill_path.read_text()
         assert placeholder in skill_text
-        assert platform_prefix in skill_text
         assert f"./{skill}" in plugin["skills"]
 
-    for preamble, gated_account_tool in UNIVERSAL_PREFLIGHTS.items():
-        preamble_text = (ROOT / preamble).read_text()
-        preflight = "call `listConnectedPlatforms` **before**"
-        disconnected_stop = f"do not call `{gated_account_tool}`"
-        assert preflight in preamble_text
-        assert disconnected_stop in preamble_text
-        assert preamble_text.index(preflight) < preamble_text.index(disconnected_stop)
+
+def test_all_host_configs_and_registry_use_one_versioned_connection():
+    expected = {UNIVERSAL_SERVER: {"type": "http", "url": UNIVERSAL_ENDPOINT}}
+    version = (ROOT / "VERSION").read_text().strip()
+    for config in (".mcp.json", "mcp.json", "gemini-extension.json"):
+        assert json.loads((ROOT / config).read_text())["mcpServers"] == expected
+    for manifest in (
+        ".claude-plugin/plugin.json", ".codex-plugin/plugin.json",
+        ".cursor-plugin/plugin.json", "plugin.json", "gemini-extension.json",
+        "server.json",
+    ):
+        assert json.loads((ROOT / manifest).read_text())["version"] == version
+    for manifest in (".codex-plugin/plugin.json", ".cursor-plugin/plugin.json"):
+        config_path = json.loads((ROOT / manifest).read_text())["mcpServers"]
+        assert json.loads((ROOT / config_path).read_text())["mcpServers"] == expected
+    marketplace = json.loads((ROOT / ".claude-plugin/marketplace.json").read_text())
+    assert marketplace["metadata"]["version"] == version
+    assert marketplace["plugins"][0]["version"] == version
+    registry = json.loads((ROOT / "server.json").read_text())
+    assert 1 <= len(registry["description"]) <= 100
+    assert registry["remotes"] == [{"type": "streamable-http", "url": UNIVERSAL_ENDPOINT}]
+    assert list(ROOT.glob("server*.json")) == [ROOT / "server.json"]
+    workflow = (ROOT / ".github/workflows/mcp-registry-publish.yml").read_text()
+    assert "validate server.json" in workflow
+    assert "publish server.json" in workflow
+
+
+def test_active_plugin_files_do_not_advertise_legacy_endpoints():
+    # Historical release notes and the separately shipped local app are not
+    # plugin installation configuration. Inspect every active plugin surface.
+    roots = [ROOT / name for name in (
+        "README.md", "AGENTS.md", "CLAUDE.md", "INSTALL_FOR_AGENTS.md",
+        "docs", "install", "paid-ads", "google-ads", "meta-ads", "analytics", "seo",
+        ".claude-plugin", ".codex-plugin", ".cursor-plugin", ".github",
+        ".mcp.json", "mcp.json", "server.json", "gemini-extension.json",
+    )]
+    for root in roots:
+        for path in (root.rglob("*") if root.is_dir() else [root]):
+            if not path.is_file() or path.suffix not in {".md", ".json", ".yml", ".sh"}:
+                continue
+            text = path.read_text()
+            for url in re.findall(r"https://(?:www\.)?notfair\.co/api/mcp[^\s\"`<>)]*", text):
+                assert url == UNIVERSAL_ENDPOINT, (path, url)
 
 
 @pytest.mark.skipif(
     os.environ.get("LIVE_MCP_E2E") != "1",
     reason="Set LIVE_MCP_E2E=1 to verify production OAuth discovery",
 )
-def test_live_mcp_oauth_discovery_round_trip():
-    endpoint = UNIVERSAL_ENDPOINT
+@pytest.mark.parametrize("origin", ["https://notfair.co", "https://www.notfair.co"])
+def test_live_mcp_oauth_discovery_round_trip(origin):
+    endpoint = f"{origin}/api/mcp/notfair"
     request = urllib.request.Request(
         endpoint,
         headers={"Accept": "application/json, text/event-stream"},
@@ -108,7 +139,7 @@ def test_live_mcp_oauth_discovery_round_trip():
         metadata = json.load(metadata_response)
 
     assert metadata["resource"] == endpoint
-    assert metadata["authorization_servers"] == ["https://notfair.co"]
+    assert metadata["authorization_servers"] == [origin]
     assert metadata["resource_name"] == "NotFair"
 
     authorization_server = metadata["authorization_servers"][0]

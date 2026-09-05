@@ -21,6 +21,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- **Skills follow live capabilities (v0.27.4).** Removed fixed MCP tool catalogs, forced call sequences, assumed limits and rollback guarantees. Account-list requests stay scoped, and SEO uses existing connectors without mandatory gcloud setup.
+
+- **Compact MCP migration completed (v0.27.3).** All plugin hosts use one `NotFair` connection at `https://notfair.co/api/mcp/notfair`. Skills now discover capabilities with `search` and use `executeRead` or `execute`, checking workspace platform access first. The registry workflow publishes only `server.json`; obsolete Google Ads and Meta Ads registry manifests are removed. The README and install guide include upgrade and reauthorization instructions. Older entries below describe historical releases, not current connection configuration.
+
 - **Canonical all-platform MCP endpoint (v0.27.2).** Updated Cursor, Codex, Claude, Gemini, Agent Plugins, MCP Registry metadata, tests, and public documentation to advertise `https://notfair.co/api/mcp/notfair`. The backward-compatible legacy route remains supported but is no longer shown to new users.
 - **One-command universal MCP onboarding (v0.27.0).** Replaced the six bundled platform server registrations with one `NotFair` MCP connection, now advertised at `https://notfair.co/api/mcp/notfair`. Codex and Claude now need one OAuth grant; workspaces enabled in the staged Google-first rollout connect Google Ads during that flow, and every supported platform remains isolated behind explicit tool prefixes such as `google_ads_`, `meta_ads_`, and `search_console_`.
 - **Repository renamed to `nowork-studio/notfair-plugin`.** Active clone, install, update-check, package metadata, and source links now use the new GitHub repository name. The plugin name and `/notfair:*` command namespace remain unchanged.

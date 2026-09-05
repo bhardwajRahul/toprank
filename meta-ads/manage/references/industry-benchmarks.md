@@ -52,7 +52,7 @@ Lower-CPM markets often have lower CVR and AOV that offset the cheaper impressio
 
 ### Mobile vs. Desktop (Meta is mobile-dominant)
 
-For most accounts > 90% of impressions are mobile. Desktop is occasionally relevant for B2B SaaS (decision-makers researching from work) but should not be the default plan. The split breakdown is available via `getInsights` with `breakdowns=publisher_platform,platform_position`.
+For most accounts > 90% of impressions are mobile. Desktop is occasionally relevant for B2B SaaS (decision-makers researching from work) but should not be the default plan. Use an available performance read with publisher-platform and placement breakdowns when supported.
 
 ### Placement performance ranking (typical, 2025)
 
