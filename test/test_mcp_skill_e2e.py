@@ -68,8 +68,11 @@ def test_universal_mcp_is_the_only_registered_server_and_skills_are_portable():
 def test_all_host_configs_and_registry_use_one_versioned_connection():
     expected = {UNIVERSAL_SERVER: {"type": "http", "url": UNIVERSAL_ENDPOINT}}
     version = (ROOT / "VERSION").read_text().strip()
-    for config in (".mcp.json", "mcp.json", "gemini-extension.json"):
+    for config in (".mcp.json", "gemini-extension.json"):
         assert json.loads((ROOT / config).read_text())["mcpServers"] == expected
+    assert json.loads((ROOT / "mcp.json").read_text())["mcpServers"] == {
+        UNIVERSAL_SERVER: {"type": "streamable-http", "url": UNIVERSAL_ENDPOINT}
+    }
     for manifest in (
         ".claude-plugin/plugin.json", ".codex-plugin/plugin.json",
         ".cursor-plugin/plugin.json", "plugin.json", "gemini-extension.json",

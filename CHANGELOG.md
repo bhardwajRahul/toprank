@@ -9,6 +9,15 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [0.27.5] — 2026-09-05
+
+### Fixed
+
+- Corrected the portable MCP manifest to use the Agent Plugins schema's `streamable-http` transport. Cursor's native manifest loads `.mcp.json` using its native `http` transport label. Both retain the same single NotFair connection.
+- Refreshed the Cursor plugin description and publisher contact information.
+
+## [0.27.4] — 2026-09-05
+
 ### Added
 
 - **Portable agent marketplace manifests (v0.27.1).** Added Agent Plugins 1.0 manifests for Kiro Powers and compatible hosts, a Gemini CLI extension manifest for automatic gallery discovery, and universal NotFair Ads metadata for the official MCP Registry. Cursor and Codex now share the standards-based root MCP manifest.

@@ -54,10 +54,11 @@ For a manual host configuration:
 
 ## Host manifests
 
-Claude Code and Codex load `.mcp.json`; Codex explicitly references that file in
-`.codex-plugin/plugin.json`. Cursor and Agent Plugins hosts load `mcp.json`.
-Gemini CLI embeds the same single connection in `gemini-extension.json`. These
-configurations must stay in parity.
+Claude Code, Codex, and Cursor's native manifest load `.mcp.json` with transport
+type `http`. Agent Plugins hosts load the standards-based `mcp.json`, whose schema
+requires transport type `streamable-http`. Gemini CLI embeds the native `http`
+configuration in `gemini-extension.json`. These host-specific transport labels
+all describe the same single NotFair Streamable HTTP connection and endpoint.
 
 ## Registry metadata
 
